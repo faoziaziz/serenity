@@ -1,0 +1,119 @@
+{
+  "project_info": {
+    "project_number": "782705776555",
+    "firebase_url": "https://as-hot-default-rtdb.firebaseio.com",
+    "project_id": "as-hot",
+    "storage_bucket": "as-hot.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:782705776555:android:77fb9efad93970cf1324ee",
+        "android_client_info": {
+          "package_name": "com.example.plat_pro_1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "782705776555-8ooq5hbk5v7pd2hk9k340gvj7flj7j08.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDIec7_EvjOlQComYNPv5XekW6XRdVX7kM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "782705776555-8ooq5hbk5v7pd2hk9k340gvj7flj7j08.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "782705776555-ou7v7uh80higkpd2onekuta8n3k5lfku.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.platPro1"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:782705776555:android:cc0a90cdd00124351324ee",
+        "android_client_info": {
+          "package_name": "io.github.faoziaziz.gms_and"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "782705776555-8ooq5hbk5v7pd2hk9k340gvj7flj7j08.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDIec7_EvjOlQComYNPv5XekW6XRdVX7kM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "782705776555-8ooq5hbk5v7pd2hk9k340gvj7flj7j08.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "782705776555-ou7v7uh80higkpd2onekuta8n3k5lfku.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.platPro1"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:782705776555:android:da1cb82f863e335c1324ee",
+        "android_client_info": {
+          "package_name": "tech.tampan.serenity"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "782705776555-8ooq5hbk5v7pd2hk9k340gvj7flj7j08.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDIec7_EvjOlQComYNPv5XekW6XRdVX7kM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "782705776555-8ooq5hbk5v7pd2hk9k340gvj7flj7j08.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "782705776555-ou7v7uh80higkpd2onekuta8n3k5lfku.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.platPro1"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
