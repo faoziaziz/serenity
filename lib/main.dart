@@ -17,6 +17,8 @@ StreamController<int> streamController = StreamController<int>();
 
 
 Future<void> main() async {
+
+  /* main asyncronus */
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
@@ -45,9 +47,9 @@ class MyApp extends StatelessWidget {
                 print("akun tak terdeteksi");
                 return LoginScreen();
               }
-              return HomePage(
-                  user: user.toString(), stream: streamController.stream);
-            }
+              return HomePage(user: user.toString(), userNum: 1,);
+             // return Text("homepage");
+             }
             return Scaffold(
                 body: Center(
               child: CircularProgressIndicator(),

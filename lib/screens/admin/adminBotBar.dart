@@ -39,9 +39,7 @@ class _AdminBotBarState extends State<AdminBotBar> {
               children: <Widget>[
                 InkWell(
                     onTap: () {
-                      print("anjing 0");
-
-                      screenState.changeStateNurse(0);
+                      screenState.changeStateAdmin(0);
                     },
                     child: Container(
                         child: Icon(
@@ -50,20 +48,18 @@ class _AdminBotBarState extends State<AdminBotBar> {
                         ))),
                 InkWell(
                     onTap: () {
-                      print("anjing 1");
-
-                      screenState.changeStateNurse(1);
+                      screenState.changeStateAdmin(1);
                     },
                     child: Container(
                         child: Icon(
-                          Icons.wallet,
+                          Icons.apple,
                           size: 40,
                         ))),
                 InkWell(
                     onTap: () {
                       print("anjing 2");
 
-                      screenState.changeStateNurse(2);
+                      screenState.changeStateAdmin(2);
                     },
                     child: Container(
                         child: Icon(
@@ -72,7 +68,7 @@ class _AdminBotBarState extends State<AdminBotBar> {
                         ))),
                 InkWell(
                     onTap: () {
-                      screenState.changeStateNurse(3);
+                      screenState.changeStateAdmin(3);
 
                     },
                     child: Container(

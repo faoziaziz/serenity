@@ -92,9 +92,14 @@ class _ListUserState extends State<ListUser> {
                           snapshot.data!.docs.map((DocumentSnapshot document) {
                         Map<String, dynamic> data =
                             document.data()! as Map<String, dynamic>;
-                        return ListTile(
-                          title: Text("$data['full_name'] "),
-                          subtitle: Text('${data['email']} : ${data['ttl']}'),
+                        return InkWell(
+                          onTap: (){
+                            print("pressed $data['full_name'] ");
+                          },
+                          child: ListTile(
+                            title: Text("$data['full_name'] "),
+                            subtitle: Text('${data['email']} : ${data['ttl']}'),
+                          ),
                         );
                       }).toList(),
                     ),

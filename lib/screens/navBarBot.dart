@@ -3,6 +3,7 @@
 * */
 
 import 'package:flutter/material.dart';
+import 'package:serenity/screens/admin/adminBotBar.dart';
 
 import '../widgets/homepage.dart';
 import 'nursery/NurserBotBar.dart';
@@ -43,6 +44,9 @@ class _NavbarBotState extends State<NavbarBot> {
   @override
   void initState() {
     // TODO: implement initState
+
+    // Should selected page compactible with pages of type user
+    selectedPage = 0;
     super.initState();
   }
 
@@ -50,7 +54,7 @@ class _NavbarBotState extends State<NavbarBot> {
     setState(() {
       bottomSelected=bot_choice;
       widget.callbackFunc(bottomSelected);
-      print("terpilih ${bottomSelected}");
+      print("terpilih bot ${bottomSelected}");
     });
     
   }
@@ -58,9 +62,12 @@ class _NavbarBotState extends State<NavbarBot> {
 
   @override
   Widget build(BuildContext context) {
+
+    /* selected page will coiced the bottom */
     switch(selectedPage){
-      case 0: return NurseryBotBarSTFULL(callBackFunction: setBottom,);
-      case 1: return bottomDoctor();
+      case 0 : return AdminBotBar();
+      case 1 : return NurseryBotBarSTFULL(callBackFunction: setBottom,);
+      case 2 : return bottomDoctor();
     }
 
     return bottomNursery(context);
@@ -96,7 +103,7 @@ Widget bottomNursery (BuildContext context){
           InkWell(onTap: (){
             Navigator.of(context).pushReplacement(
               MaterialPageRoute(
-                builder: (context) => const HomePage(user: "Selamat Datang",),
+                builder: (context) => const HomePage(user: "Selamat Datang",userNum: 0,),
               ),
             );
           },

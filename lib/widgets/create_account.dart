@@ -39,8 +39,8 @@ class _CreateAccountState extends State<CreateAccount> {
   /* add user */
   Future<void> addUser(
       {required String fullName, required String email, required String ttl}) {
-    return users
-        .add({
+    return users.doc(email)
+        .set({
       'full_name': fullName,
       'email': email,
       'ttl': ttl,
@@ -117,12 +117,13 @@ class _CreateAccountState extends State<CreateAccount> {
                     fullName: _fullnameController.text,
                     email: _emailController.text,
                     ttl: selectedDate.toString());
-                addTodb;
+
 
                 if (message!.contains('Sukses')) {
                   print(message);
+                  addTodb;
                   Navigator.of(context).pushReplacement(MaterialPageRoute(
-                      builder: (context) => const HomePage()));
+                      builder: (context) => const HomePage(userNum: 0,)));
                 }
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(

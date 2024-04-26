@@ -25,6 +25,8 @@ class _AdminScreenState extends State<AdminScreen> {
       }
     );;
   }
+
+  /* Screen yang mana yah ? */
   Widget whichAdminScreen(int choices){
     switch(choices){
       case 0 : return AdminPages();

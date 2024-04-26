@@ -28,7 +28,7 @@ class _NursPageState extends State<NursPage> {
   void setPageNurs(int choices){
     setState(() {
       choicespage= choices;
-      print("choices ${choices}");
+
     });
 
   }

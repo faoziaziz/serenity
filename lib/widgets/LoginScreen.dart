@@ -56,15 +56,17 @@ class _LoginScreenState extends State<LoginScreen> {
                 if (message!.contains('Sukses')) {
                   Navigator.of(context).pushReplacement(
                     MaterialPageRoute(
-                      builder: (context) => const HomePage(user: "Selamat Datang",),
+                      builder: (context) => const HomePage(user: "Selamat Datang", userNum: 0,),
                     ),
                   );
                 }
+
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
                     content: Text(message),
                   ),
                 );
+
               },
               child: const Text('login'),
             ),

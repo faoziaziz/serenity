@@ -33,7 +33,7 @@ class _NurseryAccountState extends State<NurseryAccount> {
           signOut;
           Navigator.of(context).pushReplacement(
             MaterialPageRoute(
-              builder: (context) => const HomePage(),
+              builder: (context) => const HomePage(userNum: 0,),
             ),
           );
         }, child: Text("Logout"))
