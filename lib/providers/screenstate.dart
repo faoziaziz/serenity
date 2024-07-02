@@ -5,9 +5,9 @@ class ScreenState with ChangeNotifier {
   int _stateNurse = 0;
   int get stateNurse => _stateNurse;
 
-
   int _stateAdmin=0;
   int get stateAdmin=> _stateAdmin;
+
   /*
   *   1. HomePage page
   *   2. List Patient page
@@ -17,6 +17,9 @@ class ScreenState with ChangeNotifier {
   int _stateBot=0;
   int get stateBot => _stateBot;
 
+  /* state buat patient */
+  int _statePatient=0;
+  int get statePatient => _statePatient;
 
   void changeStateNurse(int choices) {
     _stateNurse=choices;
@@ -32,4 +35,11 @@ class ScreenState with ChangeNotifier {
     _stateAdmin = choices;
     notifyListeners();
   }
+
+  void changeStatePatient(int choices){
+    _statePatient =choices;
+    notifyListeners();
+  }
+
 }
+

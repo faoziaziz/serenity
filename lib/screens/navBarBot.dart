@@ -7,7 +7,9 @@ import 'package:serenity/screens/admin/adminBotBar.dart';
 
 import '../widgets/homepage.dart';
 import 'nursery/NurserBotBar.dart';
-
+import 'package:provider/provider.dart';
+import 'package:serenity/providers/screenstate.dart';
+import 'package:serenity/screens/patient/patientBotBar.dart';
 
 List<IconData> navIcons = [
   Icons.home,
@@ -27,8 +29,10 @@ List<String> navTitle = [
 class NavbarBot extends StatefulWidget {
 
   final Function callbackFunc;
+  final int? bottomChoiced;
 
-  const NavbarBot({super.key, required this.callbackFunc});
+
+  const NavbarBot({super.key, required this.callbackFunc, required this.bottomChoiced});
 
   @override
   State<NavbarBot> createState() => _NavbarBotState();
@@ -46,7 +50,7 @@ class _NavbarBotState extends State<NavbarBot> {
     // TODO: implement initState
 
     // Should selected page compactible with pages of type user
-    selectedPage = 0;
+    selectedPage = 1;
     super.initState();
   }
 
@@ -64,10 +68,11 @@ class _NavbarBotState extends State<NavbarBot> {
   Widget build(BuildContext context) {
 
     /* selected page will coiced the bottom */
-    switch(selectedPage){
+    switch(widget.bottomChoiced){
       case 0 : return AdminBotBar();
       case 1 : return NurseryBotBarSTFULL(callBackFunction: setBottom,);
       case 2 : return bottomDoctor();
+      case 3 : return PatientBotBar();
     }
 
     return bottomNursery(context);
@@ -103,7 +108,7 @@ Widget bottomNursery (BuildContext context){
           InkWell(onTap: (){
             Navigator.of(context).pushReplacement(
               MaterialPageRoute(
-                builder: (context) => const HomePage(user: "Selamat Datang",userNum: 0,),
+                builder: (context) => const HomePage(),
               ),
             );
           },

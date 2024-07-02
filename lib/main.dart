@@ -1,5 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:serenity/providers/patientState.dart';
+import 'package:serenity/providers/userState.dart';
 import 'package:serenity/widgets/LoginScreen.dart';
 import 'package:serenity/widgets/auth_service.dart';
 import 'package:serenity/widgets/homepage.dart';
@@ -11,6 +13,7 @@ import 'package:provider/provider.dart';
 import 'dart:async';
 import 'package:serenity/widgets/CounterProvider.dart';
 import 'package:serenity/providers/screenstate.dart';
+
 
 StreamController<int> streamController = StreamController<int>();
 
@@ -26,6 +29,8 @@ Future<void> main() async {
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider(create: (_) => CounterProvider()),
     ChangeNotifierProvider(create: (_) => ScreenState()),
+    ChangeNotifierProvider(create: (_) => PatientState()),
+    ChangeNotifierProvider(create: (_) => UserState()),
   ], child: MyApp()));
 }
 
@@ -43,11 +48,18 @@ class MyApp extends StatelessWidget {
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.active) {
               User? user = snapshot.data;
+              if(snapshot.hasError){
+                return Text("lagi error");
+              }
               if (user == null) {
                 print("akun tak terdeteksi");
                 return LoginScreen();
+              } else if (snapshot.hasData) {
+                return  HomePage();
               }
-              return HomePage(user: user.toString(), userNum: 1,);
+              return const CircularProgressIndicator();
+                //Text("homepage ${user.toString()}");
+                //HomePage(user: user.toString(), userNum: 1,);
              // return Text("homepage");
              }
             return Scaffold(

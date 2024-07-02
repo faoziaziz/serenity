@@ -4,6 +4,8 @@ import 'package:serenity/widgets/auth_service.dart';
 import 'package:serenity/widgets/homepage.dart';
 import 'package:serenity/tasks/AddUser.dart';
 
+import 'LoginScreen.dart';
+
 class CreateAccount extends StatefulWidget {
   const CreateAccount({super.key});
 
@@ -39,22 +41,20 @@ class _CreateAccountState extends State<CreateAccount> {
   /* add user */
   Future<void> addUser(
       {required String fullName, required String email, required String ttl}) {
-    return users.doc(email)
+    return users
+        .doc(email)
         .set({
-      'full_name': fullName,
-      'email': email,
-      'ttl': ttl,
-    })
+          'full_name': fullName,
+          'email': email,
+          'ttl': ttl,
+          'status': 'user',
+        })
         .then((value) => print("user Added"))
         .catchError((error) => print("Failed to add user : $error"));
   }
 
   @override
   Widget build(BuildContext context) {
-
-
-
-
     return Scaffold(
       appBar: AppBar(
         title: const Text('Create Account'),
@@ -64,6 +64,8 @@ class _CreateAccountState extends State<CreateAccount> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+
+            /*  */
             SizedBox(
               width: MediaQuery.of(context).size.width / 2,
               child: TextField(
@@ -72,12 +74,11 @@ class _CreateAccountState extends State<CreateAccount> {
               ),
             ),
             const SizedBox(
-              height: 30.0,
+              height: 10.0,
             ),
 
             Column(
               children: <Widget>[
-
                 const SizedBox(
                   height: 20.0,
                 ),
@@ -88,6 +89,7 @@ class _CreateAccountState extends State<CreateAccount> {
                 ),
               ],
             ),
+
             SizedBox(
               width: MediaQuery.of(context).size.width / 2,
               child: TextField(
@@ -118,12 +120,11 @@ class _CreateAccountState extends State<CreateAccount> {
                     email: _emailController.text,
                     ttl: selectedDate.toString());
 
-
                 if (message!.contains('Sukses')) {
                   print(message);
                   addTodb;
                   Navigator.of(context).pushReplacement(MaterialPageRoute(
-                      builder: (context) => const HomePage(userNum: 0,)));
+                      builder: (context) => const HomePage()));
                 }
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
@@ -132,6 +133,16 @@ class _CreateAccountState extends State<CreateAccount> {
                 );
               },
               child: const Text('Create Account'),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(
+                    builder: (context) => const LoginScreen(),
+                  ),
+                );
+              },
+              child: const Text('Login Screen'),
             ),
           ],
         ),

@@ -12,9 +12,9 @@ class NurseryAccount extends StatefulWidget {
 }
 
 class _NurseryAccountState extends State<NurseryAccount> {
-  var signOut = AuthService().signOut();
+  //var signOut = AuthService().signOut();
   String? uidUser;
-  void _getUID ()async {
+  void _getUID () async {
     setState(() {
       uidUser =  AuthService() as String?;
     });
@@ -22,6 +22,9 @@ class _NurseryAccountState extends State<NurseryAccount> {
 
   }
 
+  //void _signOut(){
+  //  AuthService().signOut();
+  //}
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -30,13 +33,10 @@ class _NurseryAccountState extends State<NurseryAccount> {
         ),
         Text("${uidUser}"),
         ElevatedButton(onPressed: (){
-          signOut;
-          Navigator.of(context).pushReplacement(
-            MaterialPageRoute(
-              builder: (context) => const HomePage(userNum: 0,),
-            ),
-          );
-        }, child: Text("Logout"))
+         //_signOut();
+         // print(${AuthService()});
+          //_getUID();
+        }, child: Text("getAcount"))
       ],
     );
   }

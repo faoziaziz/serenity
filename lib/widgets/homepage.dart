@@ -11,22 +11,21 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:serenity/screens/navBarBot.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:serenity/models/users.dart';
+import 'package:provider/provider.dart';
+import 'package:serenity/providers/patientState.dart';
 
 StreamController<int> streamController = StreamController<int>();
 Map<String, int> dictStats = {
   "admin": 0,
   "nurse": 1,
   "doctor": 2,
-  "user": 4,
+  "user": 3,
 };
 
 class HomePage extends StatefulWidget {
 
-  final int? userNum;
-  final String? user;
 
-
-  const HomePage({this.user, required this.userNum});
+  const HomePage();
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -35,16 +34,19 @@ class HomePage extends StatefulWidget {
 final FirebaseAuth _auth = FirebaseAuth.instance;
 
 class _HomePageState extends State<HomePage> {
-
   /* Homepage state yang terpenting ada
   * */
+  bool _loading =true;
   dynamic dataUsers;
-  User currentUser = FirebaseAuth.instance.currentUser!;
-  CollectionReference users = FirebaseFirestore.instance.collection('users');
-  int choice_from_bot=0;
-  int numuser=0;
+  //User currentUser = FirebaseAuth.instance.currentUser!;
+  //CollectionReference users = FirebaseFirestore.instance.collection('users');
+  int choice_from_bot = 0;
+  int numuser = 0;
 
-
+  Future<Object?> _getDataUser (String docId) async {
+    DocumentSnapshot datUs = await FirebaseFirestore.instance.collection("users").doc(docId).get();
+    return datUs.data();
+  }
 
   @override
   initState() {
@@ -53,89 +55,96 @@ class _HomePageState extends State<HomePage> {
     // ignore: avoid_print
     // print("initState Called");
     if (FirebaseAuth.instance.currentUser != null) {
-      print("User's email address: ${currentUser.email}");
-      getStatusUser(currentUser.email);
-      print("User's UID: ${currentUser.uid}");
-      getStatusUser(currentUser.email);
+
+
+
+      setState(() {
+        _loading=false;
+        WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+          var patState = Provider.of<PatientState>(context, listen: false);
+          patState.changeStateUserOwner(FirebaseAuth.instance.currentUser!.email.toString());
+        });
+      });
     }
-    
-
-  }
-
-  Future<void> getStatusUser(String? user) async {
-
-    var snapshot = await users.doc(user).get().then(
-        (DocumentSnapshot doc){
-
-
-          setState(() {
-            dataUsers = doc.data();
-            
-
-          });
-
-        }
-    );
-    snapshot;
-
   }
 
 
-  void setPagesFromBot(int choice){
+
+  void setPagesFromBot(int choice) {
     /* choose for home or account pages or others */
     setState(() {
-      choice_from_bot=choice;
+      choice_from_bot = choice;
       print("coice form bot ${choice}");
     });
-
   }
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Serenity Home'),
         centerTitle: true,
       ),
-      body: Stack(
-        children: [
-          Column(
-            //mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              //Text('title bar ${this.user}'),
-              WhichUser(tipeUser: dictStats[dataUsers!['status']], botind: choice_from_bot,),
-             Text("${currentUser.email}"),
-             ElevatedButton(onPressed: (){
-               // getStatusUser(currentUser.email);
-               getStatusUser(currentUser.email);
-               print("dataUsers :  ${dataUsers}");
+      body: Consumer<PatientState>(
+        builder: (context, patState, child) {
+          return FutureBuilder(
+            future: _getDataUser(FirebaseAuth.instance.currentUser!.email.toString()),
+            builder: (context, snapshot) {
+              if (snapshot.hasError){
+                return Text("lagi error");
 
-             }, child: Text("Get Data")),
-              Text("${dataUsers!['status']}"),
-             Text("Code ${dictStats[dataUsers!['status']]}"),
-             /*
-              Text("List Pasientw"),
-              Text("The Nurse : ${currentUser.email}"),
+              }
+              if (snapshot.hasData){
+                Map<String, dynamic> dataHome =
+                snapshot.data! as Map<String, dynamic>;
 
-              ElevatedButton(
-                  onPressed: () {
-                    AuthService().signOut();
-                    Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(
-                        builder: (context) => const LoginScreen(),
+
+
+
+                return Stack(
+                  children: [
+                    Column(
+                      //mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                         WhichUser(tipeUser: dictStats[dataHome['status']], botind: dictStats[dataHome['status']],),
+
+                        ElevatedButton(
+                            onPressed: () {
+                              AuthService().signOut();
+                              Navigator.of(context).pushReplacement(
+                                MaterialPageRoute(
+                                  builder: (context) => const LoginScreen(),
+                                ),
+                              );
+                            },
+                            child: Text('Log out'))
+
+
+                      ],
+                    ),
+                    Align(
+                      alignment: Alignment.bottomCenter,
+                      child: NavbarBot(
+                        callbackFunc: setPagesFromBot,
+                        bottomChoiced: dictStats[dataHome['status']],
                       ),
-                    );
-                  },
-                  child: Text('Log out'))
+                    ),
+                  ],
+                );
 
-              */
-            ],
-          ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: NavbarBot(callbackFunc: setPagesFromBot,),
-          ),
-        ],
+
+              }
+
+
+              return Stack(
+                children: [
+                  CircularProgressIndicator(),
+                ],
+              );
+            }
+          );
+        }
       ),
     );
   }
@@ -146,20 +155,17 @@ class WhichUser extends StatelessWidget {
   final Stream<int>? stream;
 
   final int? tipeUser;
-  final int botind; // bottombar index
+  final int? botind; // bottombar index
 
   @override
   Widget build(BuildContext context) {
     if (tipeUser == 0) {
       return AdminScreen();
-    } else if(tipeUser==1){
+    } else if (tipeUser == 1) {
       return NursPage(choice: botind);
-    }
-    else if (tipeUser == 2) {
+    } else if (tipeUser == 2) {
       return DoctorScreen();
-    } else if (tipeUser == 3) {
-      return NursPage(choice: botind);
-    } else if (tipeUser == 4) {
+    }  else if (tipeUser == 3) {
       return UserScreen();
     }
     return Container();

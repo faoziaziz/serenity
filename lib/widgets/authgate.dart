@@ -20,7 +20,7 @@ class AuthGate extends StatelessWidget {
             }
 
             // Render your application if authenticated
-            return HomePage(userNum: 0,);
+            return HomePage();
           },
         );
       },

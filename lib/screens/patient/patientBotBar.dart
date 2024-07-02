@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:serenity/providers/screenstate.dart';
 import 'package:provider/provider.dart';
+import 'package:serenity/providers/patientState.dart';
+import 'package:serenity/providers/screenstate.dart';
 
-
-class AdminBotBar extends StatefulWidget {
-  const AdminBotBar({super.key});
+class PatientBotBar extends StatefulWidget {
+  const PatientBotBar({super.key});
 
   @override
-  State<AdminBotBar> createState() => _AdminBotBarState();
+  State<PatientBotBar> createState() => _PatientBotBarState();
+
+
 }
 
-
-/* admin bot state bar state */
-class _AdminBotBarState extends State<AdminBotBar> {
+class _PatientBotBarState extends State<PatientBotBar> {
   @override
   Widget build(BuildContext context) {
-    return Consumer<ScreenState>(
-      builder: (context, screenState, child) {
+    return Consumer2<PatientState, ScreenState>(
+      builder: (context, patState, screenState, child) {
         return Container(
           height: 65,
           margin: EdgeInsets.only(
@@ -35,52 +35,44 @@ class _AdminBotBarState extends State<AdminBotBar> {
               ),
             ],
           ),
+
           child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 InkWell(
                     onTap: () {
-                      screenState.changeStateAdmin(0);
+                      screenState.changeStatePatient(0);
                     },
                     child: Container(
                         child: Icon(
                           Icons.home,
                           size: 40,
                         ))),
-                InkWell(
-                    onTap: () {
-                      screenState.changeStateAdmin(1);
-                    },
-                    child: Container(
-                        child: Icon(
-                          Icons.apple,
-                          size: 40,
-                        ))),
-                InkWell(
-                    onTap: () {
-                      print("anjing 2");
 
-                      screenState.changeStateAdmin(2);
-                    },
-                    child: Container(
-                        child: Icon(
-                          Icons.person,
-                          size: 40,
-                        ))),
                 InkWell(
                     onTap: () {
-                      screenState.changeStateAdmin(3);
-
+                      screenState.changeStatePatient(1);
                     },
                     child: Container(
                         child: Icon(
-                          Icons.people,
+                          Icons.music_note,
                           size: 40,
                         ))),
+
+                InkWell(
+                    onTap: () {
+                      screenState.changeStatePatient(2);
+                    },
+                    child: Container(
+                        child: Icon(
+                          Icons.auto_stories_outlined,
+                          size: 40,
+                        ))),
+
               ]),
         );
       }
-    );
+    );;
   }
 }

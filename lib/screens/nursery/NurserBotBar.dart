@@ -41,6 +41,7 @@ class _NurseryBotBarSTFULLState extends State<NurseryBotBarSTFULL> {
               ),
             ],
           ),
+
           child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
@@ -56,6 +57,7 @@ class _NurseryBotBarSTFULLState extends State<NurseryBotBarSTFULL> {
                       Icons.home,
                       size: 40,
                     ))),
+
                 InkWell(
                     onTap: () {
                       print("anjing 1");
@@ -64,9 +66,10 @@ class _NurseryBotBarSTFULLState extends State<NurseryBotBarSTFULL> {
                     },
                     child: Container(
                         child: Icon(
-                      Icons.wallet,
+                      Icons.people,
                       size: 40,
                     ))),
+
                 InkWell(
                     onTap: () {
                       print("anjing 2");
@@ -75,21 +78,10 @@ class _NurseryBotBarSTFULLState extends State<NurseryBotBarSTFULL> {
                     },
                     child: Container(
                         child: Icon(
-                      Icons.person,
+                      Icons.auto_stories_outlined,
                       size: 40,
                     ))),
-                InkWell(
-                    onTap: () {
-                      print("anjing 3");
-                      widget.callBackFunction(3);
-                      screenState.changeStateNurse(3);
-                      counterProvider.increment();
-                    },
-                    child: Container(
-                        child: Icon(
-                      Icons.people,
-                      size: 40,
-                    ))),
+
               ]),
         );
       },
