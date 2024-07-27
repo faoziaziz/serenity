@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:serenity/providers/userState.dart';
 import 'package:serenity/screens/adminscreen.dart';
 import 'package:serenity/screens/doctorscreen.dart';
 import 'package:serenity/screens/nurspage.dart';
@@ -63,6 +64,9 @@ class _HomePageState extends State<HomePage> {
         WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
           var patState = Provider.of<PatientState>(context, listen: false);
           patState.changeStateUserOwner(FirebaseAuth.instance.currentUser!.email.toString());
+
+          //var userState = Provider.of<UserState>(context, listen: false);
+          //userState.changeStateUserOwner(FirebaseAuth.instance.currentUser!.email.toString());
         });
       });
     }
@@ -86,8 +90,8 @@ class _HomePageState extends State<HomePage> {
         title: const Text('Serenity Home'),
         centerTitle: true,
       ),
-      body: Consumer<PatientState>(
-        builder: (context, patState, child) {
+      body: Consumer2<PatientState, UserState>(
+        builder: (context, patState, userState, child) {
           return FutureBuilder(
             future: _getDataUser(FirebaseAuth.instance.currentUser!.email.toString()),
             builder: (context, snapshot) {
@@ -98,6 +102,7 @@ class _HomePageState extends State<HomePage> {
               if (snapshot.hasData){
                 Map<String, dynamic> dataHome =
                 snapshot.data! as Map<String, dynamic>;
+
 
 
 

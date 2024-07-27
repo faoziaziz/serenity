@@ -35,6 +35,8 @@ Future<void> main() async {
 }
 
 class MyApp extends StatelessWidget {
+
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -43,30 +45,37 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       debugShowCheckedModeBanner: false,
-      home: StreamBuilder<User?>(
-          stream: FirebaseAuth.instance.authStateChanges(),
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.active) {
-              User? user = snapshot.data;
-              if(snapshot.hasError){
-                return Text("lagi error");
-              }
-              if (user == null) {
-                print("akun tak terdeteksi");
-                return LoginScreen();
-              } else if (snapshot.hasData) {
-                return  HomePage();
-              }
-              return const CircularProgressIndicator();
-                //Text("homepage ${user.toString()}");
-                //HomePage(user: user.toString(), userNum: 1,);
-             // return Text("homepage");
-             }
-            return Scaffold(
-                body: Center(
-              child: CircularProgressIndicator(),
-            ));
-          }),
+      home: Consumer<UserState>(
+        builder: (context, userState, child) {
+          return StreamBuilder<User?>(
+              stream: FirebaseAuth.instance.authStateChanges(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.active) {
+                  User? user = snapshot.data;
+                  if(snapshot.hasError){
+                    return Text("lagi error");
+                  }
+                  if (user == null) {
+                    print("akun tak terdeteksi");
+                    return LoginScreen();
+                  } else if (snapshot.hasData) {
+
+
+                    //userState.changeStateUserOwner(snapshot.data!.email.toString());
+                    return  HomePage();
+                  }
+                  return const CircularProgressIndicator();
+                    //Text("homepage ${user.toString()}");
+                    //HomePage(user: user.toString(), userNum: 1,);
+                 // return Text("homepage");
+                 }
+                return Scaffold(
+                    body: Center(
+                  child: CircularProgressIndicator(),
+                ));
+              });
+        }
+      ),
     );
   }
 }

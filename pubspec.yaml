@@ -37,7 +37,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   firebase_core: ^2.27.0
   firebase_auth: ^4.17.8
-  firebase_dynamic_links: ^5.4.17
+ # firebase_dynamic_links: ^5.4.17
   firebase_ui_auth: ^1.13.1
   flutter_bloc: ^8.1.5
   audioplayers: ^5.2.1
@@ -45,6 +45,7 @@ dependencies:
   cloud_firestore: ^4.15.8
   http: ^1.2.0
   firebase_storage: ^11.6.9
+  youtube_player_flutter: ^9.0.1
 
   # youtube_player_flutter: ^9.0.1
   # flutterfire_ui: ^0.4.3+20

@@ -1,8 +1,11 @@
 import 'dart:math';
 import 'package:serenity/providers/patientState.dart';
+import 'package:serenity/screens/neutral/StrokeNotes.dart';
+import 'package:serenity/screens/nursery/AudioDart.dart';
 import 'package:serenity/screens/nursery/ListPatient.dart';
 import 'package:serenity/screens/nursery/NurseryAccount.dart';
 import 'package:serenity/screens/nursery/PatientDetails.dart';
+import 'package:serenity/screens/nursery/VideoScreen.dart';
 
 import 'nursery/streamNurse.dart';
 import 'package:serenity/providers/screenstate.dart';
@@ -69,6 +72,9 @@ class _NursPageState extends State<NursPage> {
         return NurseryAccount();
       case 3:
         return UserNurseryScreen(cbFunc: setPageNurs,);
+      //case 4: return VideoScreen();
+      case 5: return AudioScreen();
+      case 6: return StrokeNotes();
       case 25: //details patient
         return Consumer<PatientState>(
           builder: (context, patientState, child) {
